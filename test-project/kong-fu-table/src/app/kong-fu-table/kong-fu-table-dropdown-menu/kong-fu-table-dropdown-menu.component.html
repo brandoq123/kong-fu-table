@@ -1,0 +1,12 @@
+﻿<div [ngClass]="{'dropdown-menu': true, 'kong-fu-menu-right': true, 'show': showDropdown}">
+    <ul class="kong-fu-dropdown-checkbox">
+        <ng-container *ngFor="let item of items">
+            <li>
+                <a class="checkbox align-items-center" (click)="itemClicked(item)">
+                    <input type="checkbox" [name]="item.name" [(ngModel)]="item.isChecked" /> 
+                    {{item.title}}
+                </a>
+            </li>
+        </ng-container>
+    </ul>
+</div>

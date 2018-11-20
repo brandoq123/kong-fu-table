@@ -1,0 +1,35 @@
+﻿<div class="row no-gutters">
+    <div class="col-xxl-4 col-lg-6 offset-xxl-3 offset-xl-1 col-md-6 col-12">
+        <ng-container *ngIf="options.useDateRangeFilter">
+            <div class="row no-gutters">
+                <div class="col">
+                    <input class="form-control daterange-start" data-date="date" placeholder="Start Date">
+                </div>
+                <div class="col">
+                    <input class="form-control daterange-end" data-date="date" placeholder="End Date">
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div class="col-xl-5 col-md-6">
+        <div class="form-group kong-fu-form-group">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search within results" ([ngModel])="filterText">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-danger">
+                        <span class="fas fa-eraser"></span>
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <div [ngClass]="{'btn-group': true, 'show': showFilterDropdown}">
+                        <button type="button" class="btn btn-default dropdown-toggle" (click)="filterDropdownClicked()">
+                            <span>Select</span><span class="caret"></span>
+                        </button>
+                        <kong-fu-table-dropdown-menu (dropdownClosed)="dropdownClosed($event)" [showDropdown]="showFilterDropdown" [items]="columns"></kong-fu-table-dropdown-menu>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

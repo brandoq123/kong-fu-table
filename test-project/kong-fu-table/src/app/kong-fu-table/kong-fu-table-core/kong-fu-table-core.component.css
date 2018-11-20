@@ -1,0 +1,42 @@
+﻿.kong-fu-table {
+    margin-top: 5px;
+    background-color: white;
+}
+
+.kong-fu {
+    padding-top: 5px;
+    background-color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.child-row {
+    background-color: #efefef;
+}
+
+.child-row td {
+    border-top: 1px solid darkgray;
+    border-bottom: 1px solid darkgray;
+}
+
+.header {
+    white-space: nowrap;
+}
+
+.result-count {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.result-count-label {
+    padding-right: 3px;
+    padding-left: 5px;
+}
+
+@media (max-width: 375px) {
+    .kong-fu-table {
+        table-layout: fixed;
+    }
+}
