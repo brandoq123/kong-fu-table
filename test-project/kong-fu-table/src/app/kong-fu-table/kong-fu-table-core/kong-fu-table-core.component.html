@@ -14,7 +14,8 @@
                 <ng-container *ngFor="let header of columns">
                     <th *ngIf="!header.breakpoints.includes(screenBreakpoint)">
                         <div (click)="titleClicked(header)" class="header">
-                            {{header.title}}
+                            <span>{{header.title}}</span>
+                            <span *ngIf="header.isSorted" [ngClass]="{'fa': true, 'fa-sort-up': header.ascending, 'fa-sort-down': !header.ascending}"></span>
                         </div>
                         <!--TODO: Add option for column value filtering-->
                     </th>
