@@ -1,0 +1,8 @@
+﻿.disabled:hover {
+    cursor: not-allowed;
+}
+
+.disabled {
+    background-color: #949494;
+    color: #efefef;
+}

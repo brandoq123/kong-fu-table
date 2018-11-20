@@ -1,0 +1,14 @@
+﻿<ul [ngClass]="{'pagination': true, 'justify-content-center': true, 'hidden': numberOfPages === 1}">
+    <li class="page-item">
+        <button (click)="goToPrevPage()" [ngClass]="{'page-link': true, 'pagination-fix': true, 'disabled':currentPage === 1}" [disabled]="currentPage === 1">Previous</button>
+    </li>
+    <li *ngFor="let i of pages" [ngClass]="{'page-item':true, 'active': currentPage === i}">
+        <button (click)="goToPage(i)" class="page-link pagination-fix">{{i}}</button>
+    </li>
+    <li class="page-item">
+        <button (click)="goToNextPage()" [ngClass]="{'page-link': true, 'pagination-fix': true, 'disabled': currentPage === numberOfPages}" [disabled]="currentPage === numberOfPages">Next</button>
+    </li>
+</ul>
+<div style="text-align: center">
+    <span>Page {{currentPage}} of {{numberOfPages}}</span>
+</div>
