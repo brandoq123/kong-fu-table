@@ -1,7 +1,6 @@
 ﻿import { Component, Input, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import { KongFuColumn } from '../kong-fu-table-models/KongFuColumn';
 import { KongFuFilter } from '../kong-fu-table-models/KongFuFilter';
-import { KongFuDropdownItem } from '../kong-fu-table-models/KongFuDropdownItem';
 import { KongFuFiltering } from '../kong-fu-table-models/KongFuFiltering';
 import { KongFuConstants } from '../kong-fu-table-models/KongFuConstants';
 import * as moment from 'moment';

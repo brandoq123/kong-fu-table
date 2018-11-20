@@ -4,9 +4,9 @@
             <span class="result-count-label">Results</span>
             <span class="badge badge-dark">{{rows.length}}</span>
         </div>
-        <div *ngIf="options.filtering.enabled" class="col-xl-9 offset-xl-1 col-lg-9 col-md-12">
+        <!-- <div *ngIf="options.filtering.enabled" class="col-xl-9 offset-xl-1 col-lg-9 col-md-12">
             <kong-fu-table-filtering (filterData)="filterData($event)" [options]="options.filtering" [columns]="columns"></kong-fu-table-filtering>
-        </div>
+        </div> -->
     </div>
     <table class="table kong-fu-table">
         <thead>
@@ -36,7 +36,8 @@
                 <ng-container *ngFor="let column of row.columns">
                     <tr *ngIf="column.breakpoints.includes(screenBreakpoint)" [ngClass]="{'hidden': !row.isExpanded, 'child-row': true}">
                         <td><strong>{{column.title}}</strong></td>
-                        <td [colSpan]="row.columns.length-1">{{column.value}}</td>
+                        <td>{{column.value}}</td>
+                        <!-- <td [colSpan]="row.columns.length-1">{{column.value}}</td> -->
                     </tr>
                 </ng-container>
             </ng-container>
