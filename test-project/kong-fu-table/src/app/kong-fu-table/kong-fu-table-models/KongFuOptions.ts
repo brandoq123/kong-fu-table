@@ -12,12 +12,15 @@ export class KongFuOptions {
     public sorting: KongFuSorting;
     public filtering: KongFuFiltering;
     public showResultCount: boolean;
+    public title: string;
 
-    constructor(styles?: string, paging?: KongFuPaging, showResultCount?: boolean, sorting?: KongFuSorting, filtering?: KongFuFiltering) {
+    constructor(styles?: string, paging?: KongFuPaging, showResultCount?: boolean, sorting?: KongFuSorting, filtering?: KongFuFiltering,
+                title?: string) {
         this.styles = styles || '';
         this.paging = paging || new KongFuPaging();
         this.showResultCount = showResultCount || true;
         this.sorting = sorting || new KongFuSorting();
         this.filtering = filtering || new KongFuFiltering();
+        this.title = title || '';
     }
 }

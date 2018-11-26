@@ -1,4 +1,9 @@
 ﻿<div class="kong-fu">
+    <div *ngIf="options.title.length > 0" class="row">
+        <div class="col text-center">
+            <h2>{{options.title}}</h2>
+        </div>
+    </div>
     <div class="row align-items-center">
         <div *ngIf="options.showResultCount" class="col-md-2 text-left result-count">
             <span class="result-count-label">Results</span>
@@ -28,7 +33,7 @@
                 <tr (click)="showChildren(row)">
                     <ng-container *ngFor="let column of row.columns">
                         <td *ngIf="!column.breakpoints.includes(screenBreakpoint)">
-                            <div [ngClass]="{'header': column.isFirst && isBreakpointActive}">
+                            <div [ngClass]="{'header': column.isFirst && isBreakpointActive, 'text-right': column.type === 'number'}">
                                 <span *ngIf="column.isFirst && isBreakpointActive" [ngClass]="{'fa': true, 'fa-plus': !row.isExpanded, 'fa-minus': row.isExpanded}"></span>
                                 <span>{{column.value}}</span>
                             </div>
