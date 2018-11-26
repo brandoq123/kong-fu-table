@@ -10,23 +10,32 @@ export class KongFuTableDropdownMenuComponent implements OnInit, OnChanges {
     @Input() items: KongFuColumn[];
     @Input() showDropdown: boolean;
     @Output() public dropdownClosed: EventEmitter<boolean>;
+    private clickedInside: boolean;
     private hasOpened: boolean;
 
-    //close the dropdown menu when a click occurs outside of the dropdown menu
-    @HostListener('document:click', ['$event'])
-    clickout(event) {
-        if (!this.eRef.nativeElement.contains(event.target)) {
+    //Detect when a click occurs inside the component
+    @HostListener('click')
+    clickInside() {
+        this.clickedInside = true;
+    }
+    //If the click occurs outside we know to close the dropdown menu
+    @HostListener('document:click')
+    clickout() {
+        if (!this.clickedInside) {
             if (this.hasOpened === true) {
                 this.showDropdown = false;
                 this.hasOpened = false;
                 this.dropdownClosed.emit(true);
             }
         }
+        this.clickedInside = false;
     }
 
-    constructor(private eRef: ElementRef) {
-        this.hasOpened = false;
+    constructor() {
         this.dropdownClosed = new EventEmitter<boolean>();
+        this.showDropdown = false;
+        this.items = [];
+        this.hasOpened = false;
     }
 
     ngOnInit(): void {

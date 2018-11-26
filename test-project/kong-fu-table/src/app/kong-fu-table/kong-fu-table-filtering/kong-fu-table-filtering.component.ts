@@ -18,10 +18,13 @@ export class KongFuTableFilteringComponent implements OnInit {
     private showFilterDropdown: boolean;
     private filterText: string;
 
+    constructor() {
+        this.filterData = new EventEmitter<KongFuFilter[]>();   
+    }
+
     ngOnInit(): void {
         this.showFilterDropdown = false;
     }
-
 
     filterDropdownClicked(): void {
         this.showFilterDropdown = !this.showFilterDropdown;
