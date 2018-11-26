@@ -14,12 +14,12 @@
     <div class="col-xl-5 col-md-6">
         <div class="form-group kong-fu-form-group">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search within results" ([ngModel])="filterText">
+                <input type="text" class="form-control" placeholder="Search within results" [(ngModel)]="filterText">
                 <div class="input-group-append">
                     <button type="button" class="btn btn-outline-danger">
                         <span class="fas fa-eraser"></span>
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" (click)="applyFilterClicked()">
                         <span class="fa fa-search"></span>
                     </button>
                     <div [ngClass]="{'btn-group': true, 'show': showFilterDropdown}">

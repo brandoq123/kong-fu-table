@@ -37,9 +37,12 @@ export class AppComponent implements OnInit{
             'Suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque. ',
             'Cras tincidunt lobortis feugiat vivamus at. ',
             'Massa eget egestas purus viverra accumsan. ',
-            'In vitae turpis massa sed elementum tempus egestas sed sed.'
+            'In vitae turpis massa sed elementum tempus egestas sed sed.',
+            "Some other text. ",
+            "This is a random sentence. ",
+            "Kong Fu Table is the best table. "
         ];
-        for (let i = 0; i < 98; i++) {
+        for (let i = 0; i < 100000; i++) {
             let row = new KongFuRow();
             let description = '';
             let nameId = '';
