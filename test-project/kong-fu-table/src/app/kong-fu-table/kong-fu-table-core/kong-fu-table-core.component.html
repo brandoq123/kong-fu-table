@@ -9,7 +9,7 @@
             <span class="result-count-label">Results</span>
             <span class="badge badge-dark">{{rows.length}}</span>
         </div>
-        <div *ngIf="options.filtering.enabled" class="col-xl-9 offset-xl-1 col-lg-9 col-md-12">
+        <div *ngIf="options.filtering.enabled" class="col-xl-9 offset-xl-1 col-lg-10 col-md-12">
             <kong-fu-table-filtering [options]="options.filtering" [columns]="columns"
                 (filterData)="filterData($event)" (filteringStart)="filteringStart($event)"></kong-fu-table-filtering>
         </div>
