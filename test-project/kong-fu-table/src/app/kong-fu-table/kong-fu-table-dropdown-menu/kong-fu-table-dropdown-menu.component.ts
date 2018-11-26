@@ -1,5 +1,6 @@
-﻿import { Component, Input, OnInit, HostListener, ElementRef, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
+﻿import { Component, Input, OnInit, HostListener, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import { KongFuColumn } from '../kong-fu-table-models/KongFuColumn';
+import { KongFuConstants } from '../kong-fu-table-models/KongFuConstants';
 
 @Component({
     selector: 'kong-fu-table-dropdown-menu',
@@ -39,7 +40,7 @@ export class KongFuTableDropdownMenuComponent implements OnInit, OnChanges {
     }
 
     ngOnInit(): void {
-        let selectAll = new KongFuColumn('SelectAll', 'Select All');
+        let selectAll = new KongFuColumn(KongFuConstants.SELECT_ALL_NAME, KongFuConstants.SELECT_ALL_TITLE);
         this.items.unshift(selectAll);
     }
 
@@ -52,11 +53,11 @@ export class KongFuTableDropdownMenuComponent implements OnInit, OnChanges {
 
     itemClicked(item: KongFuColumn): void {
         event.stopPropagation();
-        if (item.name !== 'SelectAll') {
+        if (item.name !== KongFuConstants.SELECT_ALL_NAME) {
             item.isChecked = !item.isChecked;
             let isAllChecked = true;
             for (let i = 0; i < this.items.length; i++) {
-                if (this.items[i].name !== 'SelectAll') {
+                if (this.items[i].name !== KongFuConstants.SELECT_ALL_NAME) {
                     if (!this.items[i].isChecked) {
                         isAllChecked = false;
                     }

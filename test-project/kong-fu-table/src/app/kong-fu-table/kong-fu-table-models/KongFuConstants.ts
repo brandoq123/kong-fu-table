@@ -11,4 +11,6 @@
     public static readonly OP_GTEQ = '>=';
     public static readonly OP_LTEQ = '<=';
 
+    public static readonly SELECT_ALL_NAME = 'SelectAll';
+    public static readonly SELECT_ALL_TITLE = 'Select All';
 }

@@ -15,6 +15,7 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
     @Input() columns: KongFuColumn[];
     @Input() rows: KongFuRow[];
     @Input() options: KongFuOptions;
+    @Input() showSpinner: boolean;
     public originalData: KongFuRow[];
     public screenBreakpoint: string;
     public isBreakpointActive: boolean;
@@ -47,10 +48,19 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
     }
 
     private initializeData(): void {
+        this.showSpinner = true;
         this.currentPage = 1;
+        var populateOriginalData = false;
+        if (this.originalData == null || this.originalData.length === 0) {
+            this.originalData = [];
+            populateOriginalData = true;
+        }
         this.setScreenBreakpoint();
         this.initializeOptions();
         if (this.rows !== null && this.rows.length > 0) {
+            if (populateOriginalData) {
+                this.originalData = this.rows;
+            }
             let firstRow = this.rows[0];
             if ((firstRow.columns === null || firstRow.columns.length === 0) &&
                 (firstRow.values !== null && firstRow.values.length > 0)) {
@@ -59,6 +69,7 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
         }
         this.startIndex = 0;
         this.endIndex = this.options.paging.items;
+        this.showSpinner = false;
     }
 
     private initializeOptions(): void {
@@ -212,7 +223,13 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
         for (let i = 0; i < filters.length; i++) {
             this.rows = this.applyFilter(filters[i], this.rows);
         }
-        
+        this.showSpinner = false;
+    }
+
+    filteringStart(hasStarted: boolean) {
+        if (hasStarted) {
+            this.showSpinner = true;
+        }
     }
 
     private applyFilter(filter: KongFuFilter, data: KongFuRow[]): KongFuRow[] {
@@ -225,10 +242,19 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
                 for (let k = 0; k < filter.columns.length; k++) {
                     let filterColumn = filter.columns[k];
                     if (filterColumn.name === column.name) {
-                        if (column.value.toString().includes(filter.filterValue)) {
-                            filteredData.push(row);
-                            foundMatch = true;
-                            break;
+                        if (this.options.filtering.ignoreCase) {
+                            if (column.value.toString().toUpperCase().includes(filter.filterValue.toUpperCase())) {
+                                filteredData.push(row);
+                                foundMatch = true;
+                                break;
+                            }
+                        }
+                        else {
+                            if (column.value.toString().includes(filter.filterValue)) {
+                                filteredData.push(row);
+                                foundMatch = true;
+                                break;
+                            }
                         }
                     }
                 }
@@ -239,6 +265,8 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
         }
         return filteredData;
     }
+
+
 
     private dateCompare(a, b, ascending): number {
         if (moment(a).isAfter(b)) {

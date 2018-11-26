@@ -5,14 +5,15 @@
             <span class="badge badge-dark">{{rows.length}}</span>
         </div>
         <div *ngIf="options.filtering.enabled" class="col-xl-9 offset-xl-1 col-lg-9 col-md-12">
-            <kong-fu-table-filtering (filterData)="filterData($event)" [options]="options.filtering" [columns]="columns"></kong-fu-table-filtering>
+            <kong-fu-table-filtering [options]="options.filtering" [columns]="columns"
+                (filterData)="filterData($event)" (filteringStart)="filteringStart($event)"></kong-fu-table-filtering>
         </div>
     </div>
     <table class="table kong-fu-table">
         <thead>
             <tr>
                 <ng-container *ngFor="let header of columns">
-                    <th *ngIf="!header.breakpoints.includes(screenBreakpoint)">
+                    <th *ngIf="!header.breakpoints.includes(screenBreakpoint) && header.name !== 'SelectAll'">
                         <div (click)="titleClicked(header)" class="header">
                             <span>{{header.title}}</span>
                             <span *ngIf="header.isSorted" [ngClass]="{'fa': true, 'fa-sort-up': header.ascending, 'fa-sort-down': !header.ascending}"></span>
@@ -48,4 +49,7 @@
         <kong-fu-table-paging #pagination [numberOfItems]="rows.length" [resultsPerPage]="options.paging.items"
                               (changePage)="changePage($event)" [currentPage]="currentPage" [numPageButtons]="options.paging.pageButtons"></kong-fu-table-paging>
     </ng-container>
+    <div *ngIf="showSpinner" class="kong-fu-spinner">
+        <span class="fa fa-spinner fa-spin"></span>
+    </div>
 </div>
