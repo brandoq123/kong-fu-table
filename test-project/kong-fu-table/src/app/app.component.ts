@@ -28,6 +28,7 @@ export class AppComponent implements OnInit{
         this.kongFuOptions = new KongFuOptions();
         this.kongFuOptions.paging.enabled = true;
         this.kongFuOptions.filtering.enabled = true;
+        this.kongFuOptions.title = "Kong Fu Table";
     }
 
     private getMockRows(): KongFuRow[] {
@@ -42,7 +43,7 @@ export class AppComponent implements OnInit{
             "This is a random sentence. ",
             "Kong Fu Table is the best table. "
         ];
-        for (let i = 0; i < 100000; i++) {
+        for (let i = 0; i < 10000; i++) {
             let row = new KongFuRow();
             let description = '';
             let nameId = '';
