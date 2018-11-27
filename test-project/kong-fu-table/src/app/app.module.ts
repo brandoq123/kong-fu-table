@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModalModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,7 +13,9 @@ import { KongFuTableModule } from './kong-fu-table/kong-fu-table.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    KongFuTableModule
+    KongFuTableModule,
+    NgbModalModule,
+    NgbDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
