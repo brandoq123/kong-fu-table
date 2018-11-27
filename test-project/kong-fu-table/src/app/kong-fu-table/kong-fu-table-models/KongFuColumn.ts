@@ -12,7 +12,7 @@
     /**
      * Value for column (used for rows)
      */
-    public value?: any;
+    public value: any;
 
     /**
      * Breakpoints to show on mobile (Use bootstrap xs, sm, md, etc...)
@@ -38,6 +38,11 @@
      * Format for the string. Only used for dates
      */
     public formatString: string;
+
+    /**
+     * Determines if the date range filter will use this column
+     */
+    public useDateRangeFilter: boolean;
 
     public ascending: boolean;
     public isSorted: boolean;
@@ -70,7 +75,8 @@
         this._isFirst = isFirst;
     }
 
-    constructor(name?: string, title?: string, value?: any, sortable?: boolean, filterable?: boolean, breakpoints?: string, type?: string, formatString?: string) {
+    constructor(name?: string, title?: string, value?: any, sortable?: boolean, filterable?: boolean, breakpoints?: string, type?: string, formatString?: string,
+                useDateRangeFilter?: boolean) {
         this.name = name || '';
         this.title = title || '';
         if (value === 0) {
@@ -86,5 +92,6 @@
         this.ascending = true;
         this.isSorted = false;
         this.isChecked = true;
+        this.useDateRangeFilter = useDateRangeFilter || true;
     }
 }

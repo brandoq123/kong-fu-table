@@ -28,6 +28,7 @@ export class AppComponent implements OnInit{
         this.kongFuOptions = new KongFuOptions();
         this.kongFuOptions.paging.enabled = true;
         this.kongFuOptions.filtering.enabled = true;
+        this.kongFuOptions.filtering.useDateRangeFilter = true;
         this.kongFuOptions.title = "Kong Fu Table";
     }
 

@@ -52,6 +52,19 @@
     padding-top: 200px;
 }
 
+.remove-gutters {
+    margin-right:0 !important;
+    margin-left:0 !important;
+}
+.remove-gutters>.col,.remove-gutters>[class*=col-] {
+    padding-right:0 !important;
+    padding-left:0 !important;
+}
+
+.header-title {
+    padding-right: 5px;
+}
+
 @media (max-width: 375px) {
     .kong-fu-table {
         table-layout: fixed;
