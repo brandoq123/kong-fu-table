@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit, HostListener, OnChanges} from '@angular/core';
+﻿import { Component, Input, OnInit, HostListener, OnChanges, ElementRef, ViewChild} from '@angular/core';
 import { KongFuColumn } from '../kong-fu-table-models/KongFuColumn';
 import { KongFuRow } from '../kong-fu-table-models/KongFuRow';
 import { KongFuOptions } from '../kong-fu-table-models/KongFuOptions';
@@ -22,10 +22,21 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
     public currentPage: number;
     public startIndex: number;
     public endIndex: number;
+    public maxWidth: number;
+    public minWidth: number;
+    public totalWidth: number;
+
+    private _widthInitialized: boolean;
+
+    @ViewChild("kongFuTable", {read: ElementRef}) kongFuTable: ElementRef;
 
     @HostListener('window:resize', ['$event'])
     onResize(event?) {
         this.setScreenBreakpoint();
+    }
+    
+    constructor() {
+        this._widthInitialized = false;
     }
 
     ngOnInit(): void {
@@ -48,6 +59,8 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
     }
 
     private initializeData(): void {
+        this.maxWidth = this.kongFuTable.nativeElement.clientWidth;
+        this.minWidth = 50;
         this.showSpinner = true;
         this.currentPage = 1;
         var populateOriginalData = false;
@@ -65,6 +78,9 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
             if ((firstRow.columns === null || firstRow.columns.length === 0) &&
                 (firstRow.values !== null && firstRow.values.length > 0)) {
                 this.loadColumnDataIntoRows();
+            }
+            if (!this._widthInitialized) {
+                this.setColumnWidth();
             }
         }
         this.startIndex = 0;
@@ -102,6 +118,68 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
                 this.isBreakpointActive = true;
             }
         }
+    }
+
+    private setColumnWidth(): void {
+        let maxRowCheck = 20;
+        let columnWidths = [];
+        let average = 0;
+        let count = 0;
+        for (let i = 0; i < this.rows.length && i < maxRowCheck; i++) {
+            let row = this.rows[i];
+            for (let j = 0; j < row.columns.length; j++) {
+                let column = row.columns[j];
+                let length = row.values[j].toString().length;
+                length = length > column.title.length ? length : column.title.length;
+                average = ((average * (count)) + length) / (count + 1);
+                if (columnWidths.length >= (j + 1) && columnWidths[j].name === column.name) {
+                    if (columnWidths[j].width < length) {
+                        columnWidths[j].width = length;
+                    }
+                }
+                else {
+                    columnWidths.push({name: column.name, width: length});
+                }
+                count++;
+            }
+        }
+        let highestWidthIndex = 0;
+        let highestWidth = 0;
+        let totalOffset = 0;
+        columnWidths = this.bufferColumnLengthValues(columnWidths, average);
+        let totalLength = this.getTotalColumnLength(columnWidths);
+        for (let i = 0; i < columnWidths.length; i++) {
+            let newWidth = (columnWidths[i].width * this.maxWidth) / totalLength;
+            // if (newWidth < this.minWidth) {
+            //     totalOffset += this.minWidth - newWidth;
+            //     newWidth = this.minWidth
+            // }
+            if (newWidth > highestWidth) {
+                highestWidth = newWidth;
+                highestWidthIndex = i;
+            }
+            this.columns[i].width = newWidth;
+            if (i > 0) {
+                this.columns[i].left = this.columns[i-1].width + this.columns[i-1].left;
+            }
+        }
+        this._widthInitialized = true;
+    }
+
+    private bufferColumnLengthValues(columnWidths: any, average: number) {
+        for (let i = 0; i < columnWidths.length; i++) {
+            let bufferValue = columnWidths[i].width + ((average - columnWidths[i].width) * 0.35);
+            columnWidths[i].width = bufferValue;
+        }
+        return columnWidths;
+    }
+
+    private getTotalColumnLength(columnWidths: any): number {
+        let totalLength = 0;
+        for (let i = 0; i < columnWidths.length; i++) {
+            totalLength += columnWidths[i].width;
+        }
+        return totalLength;
     }
 
     private loadColumnDataIntoRows(): void {

@@ -44,6 +44,9 @@
      */
     public useDateRangeFilter: boolean;
 
+    public width: number;
+    public left: number;
+
     public ascending: boolean;
     public isSorted: boolean;
     public isChecked: boolean;
@@ -93,5 +96,7 @@
         this.isSorted = false;
         this.isChecked = true;
         this.useDateRangeFilter = useDateRangeFilter || true;
+        this.width = 0;
+        this.left = 0;
     }
 }
