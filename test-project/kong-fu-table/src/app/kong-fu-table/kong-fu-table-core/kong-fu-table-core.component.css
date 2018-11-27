@@ -61,8 +61,16 @@
     padding-left:0 !important;
 }
 
+.header-sort {
+    padding-left: 5px;
+}
+
+.kong-fu-header {
+    display: inline-block;
+}
+
 .header-title {
-    padding-right: 5px;
+    white-space: nowrap;
 }
 
 @media (max-width: 375px) {
