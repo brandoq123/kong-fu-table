@@ -1,4 +1,8 @@
-﻿import { Component, Input, OnInit, HostListener, OnChanges, ElementRef, ViewChild} from '@angular/core';
+﻿/**
+ * Kong Fu Table Core
+ * Version 1.0.0
+ */
+import { Component, Input, OnInit, HostListener, OnChanges, ElementRef, ViewChild} from '@angular/core';
 import { KongFuColumn } from '../kong-fu-table-models/KongFuColumn';
 import { KongFuRow } from '../kong-fu-table-models/KongFuRow';
 import { KongFuOptions } from '../kong-fu-table-models/KongFuOptions';
@@ -269,47 +273,6 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
                 }
             }
         }
-        // for (let i = 0; i < this.columns.length; i++) {
-        //     this.columns[i].position = i;
-        //     if (!foundFirst && (this.columns[i].breakpoints === null || this.columns[i].breakpoints === '')) {
-        //         this.columns[i].isFirst = true;
-        //         foundFirst = true;
-        //     }
-        //     for (let j = 0; j < numRows; j++) {
-        //         let type = this.columns[i].type;
-        //         let value = this.rows[j].values[i];
-        //         if (type === 'number') {
-        //             value = Number(value);
-        //         }
-        //         else if (type === 'date') {
-        //             let formatString = this.columns[i].formatString
-        //             //convert the date to moment incase it's string and format it correctly
-        //             if (formatString === null || formatString === undefined || formatString === '') {
-        //                 value = moment(value).format('MM/DD/YYYY');
-        //             }
-        //             else {
-        //                 value = moment(value).format(formatString);
-        //             }
-        //         }
-        //         let column = new KongFuColumn(
-        //             this.columns[i].name,
-        //             this.columns[i].title,
-        //             //value,
-        //             this.columns[i].sortable,
-        //             this.columns[i].filterable,
-        //             this.columns[i].breakpoints,
-        //             this.columns[i].type,
-        //             this.columns[i].formatString);
-        //         column.position = this.columns[i].position;
-        //         column.isFirst = this.columns[i].isFirst;
-        //         if (this.rows[j].columns === null) {
-        //             this.rows[j].columns = [column];
-        //         }
-        //         else {
-        //             this.rows[j].columns.push(column);
-        //         }
-        //     }
-        // }
     }
 
     private showChildren(row: KongFuRow): void {

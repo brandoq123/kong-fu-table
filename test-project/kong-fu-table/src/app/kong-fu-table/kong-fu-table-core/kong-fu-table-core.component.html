@@ -65,40 +65,6 @@
             </ng-container>
         </div>
     </div>
-    <!-- <table class="table kong-fu-table">
-        <thead>
-            <tr>
-                <ng-container *ngFor="let header of columns">
-                    <th *ngIf="!header.breakpoints.includes(screenBreakpoint) && header.name !== 'SelectAll'">
-                        <div (click)="titleClicked(header)" class="header">
-                            <span class="header-title">{{header.title}}</span>
-                            <span *ngIf="header.isSorted" [ngClass]="{'fa': true, 'fa-sort-up': header.ascending, 'fa-sort-down': !header.ascending}"></span>
-                        </div>
-                    </th>
-                </ng-container>
-            </tr>
-        </thead>
-        <tbody>
-            <ng-container *ngFor="let row of rows | slice:startIndex:endIndex">
-                <tr (click)="showChildren(row)">
-                    <ng-container *ngFor="let column of row.columns">
-                        <td *ngIf="!column.breakpoints.includes(screenBreakpoint)">
-                            <div [ngClass]="{'header': column.isFirst && isBreakpointActive, 'text-right': column.type === 'number'}">
-                                <span *ngIf="column.isFirst && isBreakpointActive" [ngClass]="{'fa': true, 'fa-plus': !row.isExpanded, 'fa-minus': row.isExpanded}"></span>
-                                <span>{{column.value}}</span>
-                            </div>
-                        </td>
-                    </ng-container>
-                </tr>
-                <ng-container *ngFor="let column of row.columns">
-                    <tr *ngIf="column.breakpoints.includes(screenBreakpoint)" [ngClass]="{'hidden': !row.isExpanded, 'child-row': true}">
-                        <td><strong>{{column.title}}</strong></td>
-                        <td>{{column.value}}</td>
-                    </tr>
-                </ng-container>
-            </ng-container>
-        </tbody>
-    </table> -->
     <ng-container *ngIf="options.paging !== null && options.paging !== undefined && options.paging.enabled">
         <kong-fu-table-paging #pagination [numberOfItems]="rows.length" [resultsPerPage]="options.paging.items"
                               (changePage)="changePage($event)" [currentPage]="currentPage" [numPageButtons]="options.paging.pageButtons"></kong-fu-table-paging>
