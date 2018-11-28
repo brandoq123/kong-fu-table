@@ -131,18 +131,21 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
             let row = this.rows[i];
             for (let j = 0; j < row.columns.length; j++) {
                 let column = row.columns[j];
-                let length = row.values[j].toString().length;
-                length = length > column.title.length ? length : column.title.length;
-                average = ((average * (count)) + length) / (count + 1);
-                if (columnWidths.length >= (j + 1) && columnWidths[j].name === column.name) {
-                    if (columnWidths[j].width < length) {
-                        columnWidths[j].width = length;
+                if ((this.isBreakpointActive && !column.breakpoints.includes(this.screenBreakpoint)) ||
+                    !this.isBreakpointActive) {
+                    let length = row.values[j].toString().length;
+                    length = length > column.title.length ? length : column.title.length;
+                    average = ((average * (count)) + length) / (count + 1);
+                    if (columnWidths.length >= (j + 1) && columnWidths[j].name === column.name) {
+                        if (columnWidths[j].width < length) {
+                            columnWidths[j].width = length;
+                        }
                     }
+                    else {
+                        columnWidths.push({name: column.name, width: length, index: j});
+                    }
+                    count++;
                 }
-                else {
-                    columnWidths.push({name: column.name, width: length});
-                }
-                count++;
             }
         }
         let highestWidthIndex = 0;
@@ -150,7 +153,9 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
         let totalOffset = 0;
         columnWidths = this.bufferColumnLengthValues(columnWidths, average);
         let totalLength = this.getTotalColumnLength(columnWidths);
+        let previousColumn: KongFuColumn = null;
         for (let i = 0; i < columnWidths.length; i++) {
+            let index = columnWidths[i].index;
             let newWidth = Math.floor((columnWidths[i].width * this.maxWidth) / totalLength);
             if (newWidth < this.minWidth) {
                 totalOffset += this.minWidth - newWidth;
@@ -160,23 +165,28 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
                 highestWidth = newWidth;
                 highestWidthIndex = i;
             }
-            this.columns[i].width = newWidth;
-            if (i > 0) {
-                this.columns[i].left = this.columns[i-1].width + this.columns[i-1].left;
+            this.columns[index].width = newWidth;
+            if (previousColumn !== null) {
+                this.columns[index].left = previousColumn.width + previousColumn.left;
             }
+            previousColumn = this.columns[index];
         }
         if (totalOffset > 0) {
             let widthArray = [];
             let maxWidth = 0;
             for (let i = 0; i < this.columns.length; i++) {
-                if (this.columns[i].width > this.minWidth) {
-                    let offset = this.columns[i].width - this.minWidth;
-                    let isMax = false;
-                    if (offset > maxWidth) {
-                        maxWidth = offset;
-                        isMax = true;
+                let column = this.columns[i];
+                if ((this.isBreakpointActive && !column.breakpoints.includes(this.screenBreakpoint)) ||
+                    !this.isBreakpointActive) {
+                    if (this.columns[i].width > this.minWidth) {
+                        let offset = this.columns[i].width - this.minWidth;
+                        let isMax = false;
+                        if (offset > maxWidth) {
+                            maxWidth = offset;
+                            isMax = true;
+                        }
+                        widthArray.push({index: i, offset: this.columns[i].width - this.minWidth, isMax: isMax});
                     }
-                    widthArray.push({index: i, offset: this.columns[i].width - this.minWidth, isMax: isMax});
                 }
             }
             let dividedOffset = Math.floor(totalOffset / widthArray.length);
@@ -188,10 +198,14 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
                 }
             }
             for (let i = 0; i < this.columns.length; i++) {
-                let columnOffset = this.getColumnOffset(i, widthArray);
-                this.columns[i].width = columnOffset + this.minWidth;
-                if (i > 0) {
-                    this.columns[i].left = this.columns[i-1].width + this.columns[i-1].left;
+                let column = this.columns[i];
+                if ((this.isBreakpointActive && !column.breakpoints.includes(this.screenBreakpoint)) ||
+                    !this.isBreakpointActive) {
+                    let columnOffset = this.getColumnOffset(i, widthArray);
+                    this.columns[i].width = columnOffset + this.minWidth;
+                    if (i > 0) {
+                        this.columns[i].left = this.columns[i-1].width + this.columns[i-1].left;
+                    }
                 }
             }
         }
@@ -318,8 +332,8 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
         for (let i = 0; i < a.columns.length; i++) {
             if (a.columns[i].name === key) {
                 type = a.columns[i].type;
-                aVal = a.columns[i].value;
-                bVal = b.columns[i].value;
+                aVal = a.values[i];
+                bVal = b.values[i];
                 if (type === 'number') {
                     aVal = Number(aVal);
                     bVal = Number(bVal);

@@ -5,11 +5,11 @@
         </div>
     </div>
     <div class="row align-items-center">
-        <div *ngIf="options.showResultCount" class="col-md-3 col-lg-2 text-left result-count">
+        <div *ngIf="options.showResultCount" class="col-sm-3 col-lg-2 col-12 text-left result-count">
             <span class="result-count-label">Results</span>
             <span class="badge badge-dark">{{rows.length}}</span>
         </div>
-        <div *ngIf="options.filtering.enabled" class="col-xl-9 offset-xl-1 col-lg-10 col-md-9">
+        <div *ngIf="options.filtering.enabled" class="col-xl-9 offset-xl-1 col-lg-10 col-sm-9 col-12">
             <kong-fu-table-filtering [options]="options.filtering" [columns]="columns"
                 (filterData)="filterData($event)" (filteringStart)="filteringStart($event)"></kong-fu-table-filtering>
         </div>
@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col">
                     <ng-container *ngFor="let header of columns">
-                        <div class="kong-fu-header"  [style.width]="header.width + 'px'" [style.left]="header.left + 'px'">
+                        <div *ngIf="!header.breakpoints.includes(screenBreakpoint)" class="kong-fu-header"  [style.width]="header.width + 'px'" [style.left]="header.left + 'px'">
                             <div (click)="titleClicked(header)" class="header-title">
                                 <span>{{header.title}}</span>
                                 <span *ngIf="header.isSorted" [ngClass]="{'fa': true, 'fa-sort-up': header.ascending, 'fa-sort-down': !header.ascending, 'header-sort': true}"></span>
