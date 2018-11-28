@@ -18,8 +18,8 @@ export class KongFuTableFilteringComponent implements OnInit {
     private columnsToFilter: KongFuColumn[];
     private showFilterDropdown: boolean;
     private txtFilterText: string;
-    private txtStartDate: string;
-    private txtEndDate: string;
+    // private txtStartDate: string;
+    // private txtEndDate: string;
     private activeFilters: KongFuFilter[];
 
     constructor() {
@@ -45,8 +45,8 @@ export class KongFuTableFilteringComponent implements OnInit {
         let filters: KongFuFilter[] = [];
         this.columnsToFilter = [];
         this.txtFilterText = this.txtFilterText.trim();
-        this.txtStartDate = this.txtStartDate.trim();
-        this.txtEndDate = this.txtEndDate.trim();
+        // this.txtStartDate = this.txtStartDate.trim();
+        // this.txtEndDate = this.txtEndDate.trim();
         for (let i = 0; i < this.columns.length; i++) {
             if (this.columns[i].isChecked && this.columns[i].name !== KongFuConstants.SELECT_ALL_NAME) {
                 this.columnsToFilter.push(this.columns[i]);
