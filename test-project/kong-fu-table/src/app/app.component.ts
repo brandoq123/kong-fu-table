@@ -28,6 +28,7 @@ export class AppComponent implements OnInit{
         this.kongFuOptions = new KongFuOptions();
         this.kongFuOptions.paging.enabled = true;
         this.kongFuOptions.filtering.enabled = true;
+        this.kongFuOptions.filtering.useDateRangeFilter = true;
         this.kongFuOptions.title = "Kong Fu Table";
     }
 
@@ -70,7 +71,7 @@ export class AppComponent implements OnInit{
         let column1 = new KongFuColumn(
             'Name',
             'Name',
-            'Name',
+            //'Name',
             true,
             true,
             '',
@@ -80,7 +81,7 @@ export class AppComponent implements OnInit{
         let column2 = new KongFuColumn(
             'Description',
             'Description',
-            'Description',
+            //'Description',
             true,
             true,
             '',
@@ -90,7 +91,7 @@ export class AppComponent implements OnInit{
         let column3 = new KongFuColumn(
             'Date',
             'Date',
-            'Date',
+            //'Date',
             true,
             true,
             'xs sm md',
@@ -100,7 +101,7 @@ export class AppComponent implements OnInit{
         let column4 = new KongFuColumn(
             'SubType',
             'Sub Type',
-            'Sub Type',
+            //'Sub Type',
             true,
             true,
             'xs sm md',
@@ -110,7 +111,7 @@ export class AppComponent implements OnInit{
         let column5 = new KongFuColumn(
             'Amount',
             'Amount',
-            'Amount',
+            //'Amount',
             true,
             true,
             'xs sm md',

@@ -5,25 +5,75 @@
         </div>
     </div>
     <div class="row align-items-center">
-        <div *ngIf="options.showResultCount" class="col-md-2 text-left result-count">
+        <div *ngIf="options.showResultCount" class="col-sm-3 col-lg-2 col-12 text-left result-count">
             <span class="result-count-label">Results</span>
             <span class="badge badge-dark">{{rows.length}}</span>
         </div>
-        <div *ngIf="options.filtering.enabled" class="col-xl-9 offset-xl-1 col-lg-10 col-md-12">
+        <div *ngIf="options.filtering.enabled" class="col-xl-9 offset-xl-1 col-lg-10 col-sm-9 col-12">
             <kong-fu-table-filtering [options]="options.filtering" [columns]="columns"
                 (filterData)="filterData($event)" (filteringStart)="filteringStart($event)"></kong-fu-table-filtering>
         </div>
     </div>
-    <table class="table kong-fu-table">
+    <div #kongFuTable class="kong-fu-table">
+        <div class="kong-fu-header-section">
+            <div class="row">
+                <div class="col">
+                    <ng-container *ngFor="let header of columns">
+                        <div *ngIf="!header.breakpoints.includes(screenBreakpoint)" class="kong-fu-header"  [style.width]="header.width + 'px'" [style.left]="header.left + 'px'">
+                            <div (click)="titleClicked(header)" class="header-title">
+                                <span>{{header.title}}</span>
+                                <span *ngIf="header.isSorted" [ngClass]="{'fa': true, 'fa-sort-up': header.ascending, 'fa-sort-down': !header.ascending, 'header-sort': true}"></span>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="kong-fu-body-section">
+            <ng-container *ngFor="let row of rows | slice:startIndex:endIndex">
+                <div class="row" (click)="showChildren(row)">
+                    <div class="col">
+                        <div class="kong-fu-row">
+                            <ng-container *ngFor="let column of row.columns; let i = index">
+                                <div *ngIf="!column.breakpoints.includes(screenBreakpoint)" [style.width]="column.width + 'px'" [style.left]="column.left + 'px'"
+                                    class="kong-fu-cell">
+                                    <div [ngClass]="{'header': column.isFirst && isBreakpointActive, 'text-right': column.type === 'number'}">
+                                        <span *ngIf="column.isFirst && isBreakpointActive" [ngClass]="{'fa': true, 'fa-plus': !row.isExpanded, 'fa-minus': row.isExpanded, 'collapse-icon': true}"></span>
+                                        <span>{{row.values[i]}}</span>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <ng-container *ngFor="let column of row.columns; let i = index">
+                    <div *ngIf="column.breakpoints.includes(screenBreakpoint)" [ngClass]="{'row': true, 'hidden': !row.isExpanded}">
+                        <div class="col">
+                            <div class="child-row">
+                                <div class="kong-fu-row">
+                                    <div class="kong-fu-cell header-title" [style.width]="firstColumn.width + 'px'">
+                                        {{column.title}}
+                                    </div>
+                                    <div class="kong-fu-cell" [style.width]="(maxWidth - firstColumn.width) + 'px'" [style.left]="firstColumn.width">
+                                        {{row.values[i]}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+    <!-- <table class="table kong-fu-table">
         <thead>
             <tr>
                 <ng-container *ngFor="let header of columns">
                     <th *ngIf="!header.breakpoints.includes(screenBreakpoint) && header.name !== 'SelectAll'">
                         <div (click)="titleClicked(header)" class="header">
-                            <span>{{header.title}}</span>
+                            <span class="header-title">{{header.title}}</span>
                             <span *ngIf="header.isSorted" [ngClass]="{'fa': true, 'fa-sort-up': header.ascending, 'fa-sort-down': !header.ascending}"></span>
                         </div>
-                        <!--TODO: Add option for column value filtering-->
                     </th>
                 </ng-container>
             </tr>
@@ -44,12 +94,11 @@
                     <tr *ngIf="column.breakpoints.includes(screenBreakpoint)" [ngClass]="{'hidden': !row.isExpanded, 'child-row': true}">
                         <td><strong>{{column.title}}</strong></td>
                         <td>{{column.value}}</td>
-                        <!-- <td [colSpan]="row.columns.length-1">{{column.value}}</td> -->
                     </tr>
                 </ng-container>
             </ng-container>
         </tbody>
-    </table>
+    </table> -->
     <ng-container *ngIf="options.paging !== null && options.paging !== undefined && options.paging.enabled">
         <kong-fu-table-paging #pagination [numberOfItems]="rows.length" [resultsPerPage]="options.paging.items"
                               (changePage)="changePage($event)" [currentPage]="currentPage" [numPageButtons]="options.paging.pageButtons"></kong-fu-table-paging>

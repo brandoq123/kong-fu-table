@@ -17,7 +17,9 @@ export class KongFuTableFilteringComponent implements OnInit {
     @Output() filteringStart: EventEmitter<boolean>;
     private columnsToFilter: KongFuColumn[];
     private showFilterDropdown: boolean;
-    private filterText: string;
+    private txtFilterText: string;
+    // private txtStartDate: string;
+    // private txtEndDate: string;
     private activeFilters: KongFuFilter[];
 
     constructor() {
@@ -42,20 +44,23 @@ export class KongFuTableFilteringComponent implements OnInit {
         this.filteringStart.emit(true);
         let filters: KongFuFilter[] = [];
         this.columnsToFilter = [];
-        this.filterText = this.filterText.trim();
+        this.txtFilterText = this.txtFilterText.trim();
+        // this.txtStartDate = this.txtStartDate.trim();
+        // this.txtEndDate = this.txtEndDate.trim();
         for (let i = 0; i < this.columns.length; i++) {
             if (this.columns[i].isChecked && this.columns[i].name !== KongFuConstants.SELECT_ALL_NAME) {
                 this.columnsToFilter.push(this.columns[i]);
             }
         }
-        if ((this.filterText != null && this.filterText !== '') || this.activeFilters.length > 0) {
+        if ((this.txtFilterText != null && this.txtFilterText !== '') || this.activeFilters.length > 0) {
             let textFilter = new KongFuFilter(
                 this.columnsToFilter,
-                this.filterText,
+                this.txtFilterText,
                 KongFuConstants.OP_EQ
             );
             filters.push(textFilter);
         }
+
         this.activeFilters = filters;
         this.filterData.emit(filters);
     }

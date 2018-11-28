@@ -52,6 +52,51 @@
     padding-top: 200px;
 }
 
+.remove-gutters {
+    margin-right:0 !important;
+    margin-left:0 !important;
+}
+.remove-gutters>.col,.remove-gutters>[class*=col-] {
+    padding-right:0 !important;
+    padding-left:0 !important;
+}
+
+.header-sort {
+    padding-left: 5px;
+}
+
+.collapse-icon {
+    padding-right: 5px;
+}
+
+.kong-fu-header {
+    display: inline-block;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.header-title {
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.kong-fu-header-section {
+    border-bottom: solid 1px #d4d4d4;
+}
+
+.kong-fu-row {
+    border-top: solid 1px #d4d4d4;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.kong-fu-cell {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
 @media (max-width: 375px) {
     .kong-fu-table {
         table-layout: fixed;
