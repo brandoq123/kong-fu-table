@@ -12,7 +12,7 @@
     /**
      * Value for column (used for rows)
      */
-    public value: any;
+    // public value: any;
 
     /**
      * Breakpoints to show on mobile (Use bootstrap xs, sm, md, etc...)
@@ -46,7 +46,8 @@
 
     public width: number;
     public left: number;
-
+    public minWidthDiff: number;
+    
     public ascending: boolean;
     public isSorted: boolean;
     public isChecked: boolean;
@@ -78,15 +79,15 @@
         this._isFirst = isFirst;
     }
 
-    constructor(name?: string, title?: string, value?: any, sortable?: boolean, filterable?: boolean, breakpoints?: string, type?: string, formatString?: string,
+    constructor(name?: string, title?: string, /*value?: any,*/ sortable?: boolean, filterable?: boolean, breakpoints?: string, type?: string, formatString?: string,
                 useDateRangeFilter?: boolean) {
         this.name = name || '';
         this.title = title || '';
-        if (value === 0) {
-            this.value = value;
-        } else {
-            this.value = value || null;
-        }
+        // if (value === 0) {
+        //     this.value = value;
+        // } else {
+        //     this.value = value || null;
+        // }
         this.sortable = sortable || false;
         this.filterable = filterable || false;
         this.breakpoints = breakpoints || '';
