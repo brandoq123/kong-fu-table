@@ -25,6 +25,7 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
     public maxWidth: number;
     public minWidth: number;
     public totalWidth: number;
+    public firstColumn: KongFuColumn;
 
     private _widthInitialized: boolean;
 
@@ -245,6 +246,12 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
             let row = this.rows[i];
             row.columns = this.columns;
             for (let j = 0; j < this.columns.length; j++) {
+                this.columns[j].position = j;
+                if (!foundFirst && (this.columns[j].breakpoints === null || this.columns[j].breakpoints === '')) {
+                    this.columns[j].isFirst = true;
+                    this.firstColumn = this.columns[j];
+                    foundFirst = true;
+                }
                 let type = this.columns[j].type;
                 let value = this.rows[i].values[j];
                 if (type === 'number') {

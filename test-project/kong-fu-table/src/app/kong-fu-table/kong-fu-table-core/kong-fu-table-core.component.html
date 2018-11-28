@@ -38,7 +38,7 @@
                                 <div *ngIf="!column.breakpoints.includes(screenBreakpoint)" [style.width]="column.width + 'px'" [style.left]="column.left + 'px'"
                                     class="kong-fu-cell">
                                     <div [ngClass]="{'header': column.isFirst && isBreakpointActive, 'text-right': column.type === 'number'}">
-                                        <span *ngIf="column.isFirst && isBreakpointActive" [ngClass]="{'fa': true, 'fa-plus': !row.isExpanded, 'fa-minus': row.isExpanded}"></span>
+                                        <span *ngIf="column.isFirst && isBreakpointActive" [ngClass]="{'fa': true, 'fa-plus': !row.isExpanded, 'fa-minus': row.isExpanded, 'collapse-icon': true}"></span>
                                         <span>{{row.values[i]}}</span>
                                     </div>
                                 </div>
@@ -46,12 +46,22 @@
                         </div>
                     </div>
                 </div>
-                <!-- <ng-container *ngFor="let column of row.columns">
-                    <tr *ngIf="column.breakpoints.includes(screenBreakpoint)" [ngClass]="{'hidden': !row.isExpanded, 'child-row': true}">
-                        <td><strong>{{column.title}}</strong></td>
-                        <td>{{column.value}}</td>
-                    </tr>
-                </ng-container> -->
+                <ng-container *ngFor="let column of row.columns; let i = index">
+                    <div *ngIf="column.breakpoints.includes(screenBreakpoint)" [ngClass]="{'row': true, 'hidden': !row.isExpanded}">
+                        <div class="col">
+                            <div class="child-row">
+                                <div class="kong-fu-row">
+                                    <div class="kong-fu-cell header-title" [style.width]="firstColumn.width + 'px'">
+                                        {{column.title}}
+                                    </div>
+                                    <div class="kong-fu-cell" [style.width]="(maxWidth - firstColumn.width) + 'px'" [style.left]="firstColumn.width">
+                                        {{row.values[i]}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
             </ng-container>
         </div>
     </div>
