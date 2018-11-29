@@ -66,7 +66,7 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
     }
 
     private initializeData(): void {
-        this.minWidth = 90;
+        this.minWidth = 100;
         this.showSpinner = true;
         this.currentPage = 1;
         var populateOriginalData = false;

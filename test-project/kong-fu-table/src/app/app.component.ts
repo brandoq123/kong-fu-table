@@ -35,11 +35,11 @@ export class AppComponent implements OnInit{
     private getMockRows(): KongFuRow[] {
         let data: KongFuRow[] = [];
         let descArray = [
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-            'Suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque. ',
-            'Cras tincidunt lobortis feugiat vivamus at. ',
-            'Massa eget egestas purus viverra accumsan. ',
-            'In vitae turpis massa sed elementum tempus egestas sed sed. ',
+            'More testing text. ',
+            'The ball is blue. ',
+            'My favorite language is c#. ',
+            'Blah blah blah blah blah. ',
+            'Some more description stuff. ',
             'Some other text. ',
             'This is a random sentence. ',
             'Kong Fu Table is the best table. '
@@ -48,7 +48,7 @@ export class AppComponent implements OnInit{
             let row = new KongFuRow();
             let description = '';
             let nameId = '';
-            let randNum = Math.floor(Math.random() * descArray.length) + 1;
+            let randNum = Math.floor(Math.random() * descArray.length) + 5;
             for (let j = 0; j < randNum; j++) {
                 let randIndex = Math.floor(Math.random() * (descArray.length - 1));
                 description += descArray[randIndex];

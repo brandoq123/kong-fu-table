@@ -95,6 +95,28 @@
     vertical-align: top;
     padding-left: 3px;
     padding-right: 3px;
+    
+}
+
+.text-ellipsis {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: auto;
+    background-color: white;
+    z-index:5;
+    padding-right: 5px;
+    padding-left: 2px;
+}
+
+.kong-fu-cell-data {
+    position: relative;
+    max-height: 4.6rem;
+    overflow: hidden;
+}
+
+.full-text {
+    display: none;
 }
 
 @media (max-width: 375px) {

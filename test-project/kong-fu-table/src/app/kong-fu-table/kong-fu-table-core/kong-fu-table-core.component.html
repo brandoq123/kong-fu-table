@@ -37,9 +37,20 @@
                             <ng-container *ngFor="let column of row.columns; let i = index">
                                 <div *ngIf="!column.breakpoints.includes(screenBreakpoint)" [style.width]="column.width + 'px'" [style.left]="column.left + 'px'"
                                     class="kong-fu-cell">
-                                    <div [ngClass]="{'header': column.isFirst && isBreakpointActive, 'text-right': column.type === 'number'}">
-                                        <span *ngIf="column.isFirst && isBreakpointActive" [ngClass]="{'fa': true, 'fa-plus': !row.isExpanded, 'fa-minus': row.isExpanded, 'collapse-icon': true}"></span>
-                                        <span>{{row.values[i]}}</span>
+                                    <div class="kong-fu-cell-data">
+                                        <div [ngClass]="{'header': column.isFirst && isBreakpointActive, 'text-right': column.type === 'number'}">
+                                            <span *ngIf="column.isFirst && isBreakpointActive" [ngClass]="{'fa': true, 'fa-plus': !row.isExpanded, 'fa-minus': row.isExpanded, 'collapse-icon': true}"></span>
+                                            <span class="visible-text">
+                                                {{
+                                                    row.values[i].toString().length >= (column.width * 0.395) ?
+                                                    row.values[i].toString().slice(0,column.width * 0.395).trim() + '...' :
+                                                    row.values[i].toString()
+                                                }}
+                                            </span>
+                                            <span *ngIf="row.values[i].toString().length >= (column.width * 0.395)" class="full-text">
+                                                {{row.values[i]}}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </ng-container>
