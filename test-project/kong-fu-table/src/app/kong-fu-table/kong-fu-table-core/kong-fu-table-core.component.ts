@@ -30,6 +30,7 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
     public minWidth: number;
     public totalWidth: number;
     public firstColumn: KongFuColumn;
+    public ellipseValue: number;
 
     private _widthInitialized: boolean;
 
@@ -105,18 +106,37 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
         let screenWidth = this.kongFuMain.nativeElement.clientWidth;
         if (screenWidth < 576) {
             this.screenBreakpoint = 'xs';
+            if (screenWidth < 320) {
+                this.ellipseValue = 0.275
+            }
+            else if (screenWidth < 375) {
+                this.ellipseValue = 0.31;
+            }
+            else if (screenWidth < 415) {
+                this.ellipseValue = 0.34;
+            }
+            else if (screenWidth < 475) {
+                this.ellipseValue = 0.357;
+            }
+            else {
+                this.ellipseValue = 0.365;
+            }
         }
         else if (screenWidth >= 576 && screenWidth < 768) {
             this.screenBreakpoint = 'sm';
+            this.ellipseValue = 0.38;
         }
         else if (screenWidth >= 768 && screenWidth < 992) {
             this.screenBreakpoint = 'md';
+            this.ellipseValue = 0.395;
         }
         else if (screenWidth >= 992 && screenWidth < 1200) {
             this.screenBreakpoint = 'lg';
+            this.ellipseValue = 0.4;
         }
         else if (screenWidth >= 1200) {
             this.screenBreakpoint = 'xl';
+            this.ellipseValue = 0.41;
         }
         this.isBreakpointActive = false;
         for (let i = 0; i < this.columns.length; i++) {

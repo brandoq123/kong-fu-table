@@ -40,16 +40,13 @@
                                     <div class="kong-fu-cell-data">
                                         <div [ngClass]="{'header': column.isFirst && isBreakpointActive, 'text-right': column.type === 'number'}">
                                             <span *ngIf="column.isFirst && isBreakpointActive" [ngClass]="{'fa': true, 'fa-plus': !row.isExpanded, 'fa-minus': row.isExpanded, 'collapse-icon': true}"></span>
-                                            <span class="visible-text">
+                                            <a [ngClass]="{'visible-text': row.values[i].toString().length >= (column.width * ellipseValue)}" attr.aria-label="{{row.values[i].toString().length >= (column.width * ellipseValue) ? row.values[i] : ''}}">
                                                 {{
-                                                    row.values[i].toString().length >= (column.width * 0.395) ?
-                                                    row.values[i].toString().slice(0,column.width * 0.395).trim() + '...' :
+                                                    row.values[i].toString().length >= (column.width * ellipseValue) ?
+                                                    row.values[i].toString().slice(0,column.width * ellipseValue).trim() + '...' :
                                                     row.values[i].toString()
                                                 }}
-                                            </span>
-                                            <span *ngIf="row.values[i].toString().length >= (column.width * 0.395)" class="full-text">
-                                                {{row.values[i]}}
-                                            </span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

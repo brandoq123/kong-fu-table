@@ -112,11 +112,24 @@
 .kong-fu-cell-data {
     position: relative;
     max-height: 4.6rem;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
-.full-text {
-    display: none;
+.visible-text:hover {
+    position: relative;
+}
+
+.visible-text[aria-label]:hover:after,.visible-text[aria-label]:active:after {
+    content: attr(aria-label);
+    padding: 1px 2px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 20000;
+    background: white;
+    border: solid gray 1px;
+    border-radius: 5px;
+    width: 10rem;
 }
 
 @media (max-width: 375px) {
