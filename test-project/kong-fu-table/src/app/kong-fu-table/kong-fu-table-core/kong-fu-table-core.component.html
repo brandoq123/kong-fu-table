@@ -1,15 +1,15 @@
-﻿<div class="kong-fu">
+﻿<div #kongFuMain class="kong-fu">
     <div *ngIf="options.title.length > 0" class="row">
         <div class="col text-center">
             <h2>{{options.title}}</h2>
         </div>
     </div>
     <div class="row align-items-center">
-        <div *ngIf="options.showResultCount" class="col-sm-3 col-lg-2 col-12 text-left result-count">
+        <div *ngIf="options.showResultCount" class="col-sm-4 col-lg-3 col-12 text-left result-count">
             <span class="result-count-label">Results</span>
             <span class="badge badge-dark">{{rows.length}}</span>
         </div>
-        <div *ngIf="options.filtering.enabled" class="col-xl-9 offset-xl-1 col-lg-10 col-sm-9 col-12">
+        <div *ngIf="options.filtering.enabled" class="col-lg-9 col-sm-8 col-12">
             <kong-fu-table-filtering [options]="options.filtering" [columns]="columns"
                 (filterData)="filterData($event)" (filteringStart)="filteringStart($event)"></kong-fu-table-filtering>
         </div>

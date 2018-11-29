@@ -34,6 +34,7 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
     private _widthInitialized: boolean;
 
     @ViewChild("kongFuTable", {read: ElementRef}) kongFuTable: ElementRef;
+    @ViewChild("kongFuMain", {read: ElementRef}) kongFuMain: ElementRef;
 
     @HostListener('window:resize', ['$event'])
     onResize(event?) {
@@ -101,7 +102,7 @@ export class KongFuTableCoreComponent implements OnInit, OnChanges {
     }
 
     private setScreenBreakpoint(): void {
-        let screenWidth = window.innerWidth;
+        let screenWidth = this.kongFuMain.nativeElement.clientWidth;
         if (screenWidth < 576) {
             this.screenBreakpoint = 'xs';
         }

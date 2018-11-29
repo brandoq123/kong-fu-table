@@ -39,10 +39,10 @@ export class AppComponent implements OnInit{
             'Suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque. ',
             'Cras tincidunt lobortis feugiat vivamus at. ',
             'Massa eget egestas purus viverra accumsan. ',
-            'In vitae turpis massa sed elementum tempus egestas sed sed.',
-            "Some other text. ",
-            "This is a random sentence. ",
-            "Kong Fu Table is the best table. "
+            'In vitae turpis massa sed elementum tempus egestas sed sed. ',
+            'Some other text. ',
+            'This is a random sentence. ',
+            'Kong Fu Table is the best table. '
         ];
         for (let i = 0; i < 10000; i++) {
             let row = new KongFuRow();
@@ -71,7 +71,6 @@ export class AppComponent implements OnInit{
         let column1 = new KongFuColumn(
             'Name',
             'Name',
-            //'Name',
             true,
             true,
             '',
@@ -81,7 +80,6 @@ export class AppComponent implements OnInit{
         let column2 = new KongFuColumn(
             'Description',
             'Description',
-            //'Description',
             true,
             true,
             '',
@@ -91,17 +89,15 @@ export class AppComponent implements OnInit{
         let column3 = new KongFuColumn(
             'Date',
             'Date',
-            //'Date',
             true,
             true,
-            'xs sm md',
+            'xs sm',
             'date',
             null
         );
         let column4 = new KongFuColumn(
             'SubType',
             'Sub Type',
-            //'Sub Type',
             true,
             true,
             'xs sm md',
@@ -111,7 +107,6 @@ export class AppComponent implements OnInit{
         let column5 = new KongFuColumn(
             'Amount',
             'Amount',
-            //'Amount',
             true,
             true,
             'xs sm md',
